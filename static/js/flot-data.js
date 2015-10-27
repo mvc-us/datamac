@@ -1,3 +1,7 @@
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 //Flot Line Chart
 $(document).ready(function() {
     console.log("document ready");
@@ -54,10 +58,10 @@ $(function() {
 
     var data = [{
         label: "Returning Customers",
-        data: 30
+        data: getRandomInt(20, 60)
     }, {
         label: "New Customers",
-        data: 64
+        data: getRandomInt(10, 40)
     }];
 
     var plotObj = $.plot($("#flot-pie-chart"), data, {
@@ -106,7 +110,7 @@ $(function() {
         while (data.length < maximum) {
             var previous = data.length ? data[data.length - 1] : 50;
             var y = previous + Math.random() * 10 - 5;
-            data.push(y < 130 ? 130 : y > 350 ? 350 : y);
+            data.push(y < 30 ? 30 : y > 83 ? 83 : y);
         }
 
         // zip the generated y values with the x values
@@ -165,7 +169,7 @@ $(function() {
         },
         yaxis: {
             min: 0,
-            max: 400
+            max: 100
         },
         legend: {
             show: true
