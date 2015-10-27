@@ -12,6 +12,11 @@ def hello():
 def dashboard():
     return render_template('index.html')
 
+@app.route('/details')
+@app.route('/details.html')
+def details():
+	return render_template('details.html')
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('login.html'), 404
