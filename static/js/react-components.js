@@ -4,6 +4,14 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function max(x, y) {
+	return x > y ? x : y;
+}
+
+function min(x, y) {
+	return x > y ? y : x;
+}
+
 var LargeStatus = React.createClass({
 	displayName: "LargeStatus",
 
@@ -16,7 +24,7 @@ var LargeStatus = React.createClass({
 		setInterval(function () {
 			var curNumber = reactObj.state.number;
 			var flux = reactObj.props.flux;
-			reactObj.setState({ number: getRandomInt(curNumber - flux, curNumber + flux + 2) });
+			reactObj.setState({ number: getRandomInt(max(curNumber - flux, reactObj.props.min), min(curNumber + flux + 1, reactObj.props.max)) });
 		}, 1000);
 	},
 	render: function render() {
