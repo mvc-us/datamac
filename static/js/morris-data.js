@@ -1,64 +1,86 @@
+function getDayOfWeek(day) {
+    var d = new Date();
+    var other = new Date(d.getFullYear(), d.getMonth(), d.getDate() + day, 18, 0, 0, 0);
+    return other.getTime();
+}
+
+function dayOfWeekAsString(dayIndex) {
+    return ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"][dayIndex];
+}
+
+function getDayLabel(d) {
+    var temp = new Date(d);
+    return dayOfWeekAsString(temp.getDay()) + "-" + temp.getDate();
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.floor(Math.random() * (max - min + 1)) + min);
+}
+
+function fillDataArray() {
+    var arr = [];
+    for (var i = 0; i < 10; i++) {
+        var item = {};
+        item.period = getDayOfWeek(i);
+        item.nearby = getRandomInt(500, 1000);
+        item.dishes = getRandomInt(300, 700);
+        item.eatIn = getRandomInt(200, 300);
+        arr.push(item);
+    }
+    return arr;
+}
+
+function empForecast(hour) {
+    var dinnerDist = 1+Math.abs(hour - 19);
+    var highest = getRandomInt(5/dinnerDist, 12/dinnerDist);
+    var lunchDist = 1+Math.abs(hour - 12);
+    highest = max(highest, getRandomInt(3/lunchDist, 7/lunchDist));
+    return highest;
+}
+
+function fillEmpArray() {
+    var d = new Date();
+    var arr = [];
+    for (var i = 1; i < 7; i++) {
+        var item = {};
+        var hours = d.getHours() + i;
+        var t = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hours, 0, 0, 0);
+        item.period = t.getTime();
+        hours %= 24;
+        var forecast = empForecast(hours);
+        item.forecast = forecast;
+        arr.push(item);
+    }
+    return arr;
+}
+
 $(function() {
 
     Morris.Area({
         element: 'morris-area-chart',
-        data: [{
-            period: '2015 Q3',
-            iphone: 2666,
-            ipad: null,
-            itouch: 2647
-        }, {
-            period: '2015 Q4',
-            iphone: 2778,
-            ipad: 2294,
-            itouch: 2441
-        }, {
-            period: '2016 Q1',
-            iphone: 4912,
-            ipad: 1969,
-            itouch: 2501
-        }, {
-            period: '2016 Q2',
-            iphone: 3767,
-            ipad: 3597,
-            itouch: 5689
-        }, {
-            period: '2016 Q3',
-            iphone: 6810,
-            ipad: 1914,
-            itouch: 2293
-        }, {
-            period: '2016 Q4',
-            iphone: 5670,
-            ipad: 4293,
-            itouch: 1881
-        }, {
-            period: '2017 Q1',
-            iphone: 4820,
-            ipad: 3795,
-            itouch: 1588
-        }, {
-            period: '2017 Q2',
-            iphone: 15073,
-            ipad: 5967,
-            itouch: 5175
-        }, {
-            period: '2017 Q3',
-            iphone: 10687,
-            ipad: 4460,
-            itouch: 2028
-        }, {
-            period: '2017 Q4',
-            iphone: 8432,
-            ipad: 5713,
-            itouch: 1791
-        }],
+        data: fillDataArray(),
         xkey: 'period',
-        ykeys: ['iphone', 'ipad', 'itouch'],
-        labels: ['Nearby', 'Eat In', 'Takeout'],
+        xLabels: "day",
+        behaveLikeLine: true,
+        ykeys: ['nearby', 'dishes', 'eatIn'],
+        labels: ['Nearby', 'Dishes', 'Eat In'],
         pointSize: 2,
         hideHover: 'auto',
-        resize: true
+        resize: true,
+        xLabelFormat: getDayLabel,
+    });
+
+    Morris.Area({
+        element: 'emp-scheduling',
+        data: fillEmpArray(),
+        xkey: 'period',
+        behaveLikeLine: true,
+        ykeys: ['forecast'],
+        labels: ['Employee Forecast'],
+        pointSize: 2,
+        hideHover: 'auto',
+        resize: true,
+        // xLabelFormat: getDayLabel,
     });
 
     Morris.Donut({
