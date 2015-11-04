@@ -23,8 +23,8 @@ function fillDataArray() {
         var item = {};
         item.period = getDayOfWeek(i);
         item.nearby = getRandomInt(500, 1000);
-        item.dishes = getRandomInt(300, 700);
-        item.eatIn = getRandomInt(200, 300);
+        // item.dishes = getRandomInt(300, 400);
+        item.eatIn = getRandomInt(100, 300);
         arr.push(item);
     }
     return arr;
@@ -32,9 +32,9 @@ function fillDataArray() {
 
 function empForecast(hour) {
     var dinnerDist = 1+Math.abs(hour - 19);
-    var highest = getRandomInt(5/dinnerDist, 12/dinnerDist);
+    var highest = getRandomInt(8/dinnerDist, 15/dinnerDist);
     var lunchDist = 1+Math.abs(hour - 12);
-    highest = max(highest, getRandomInt(3/lunchDist, 7/lunchDist));
+    highest = max(highest, getRandomInt(5/lunchDist, 8/lunchDist));
     return highest;
 }
 
@@ -62,8 +62,10 @@ $(function() {
         xkey: 'period',
         xLabels: "day",
         behaveLikeLine: true,
-        ykeys: ['nearby', 'dishes', 'eatIn'],
-        labels: ['Nearby', 'Dishes', 'Eat In'],
+        ykeys: ['nearby','eatIn'],
+        labels: ['Nearby', 'Eat In'],
+        // ykeys: ['nearby', 'dishes', 'eatIn'],
+        // labels: ['Nearby', 'Dishes', 'Eat In'],
         pointSize: 2,
         hideHover: 'auto',
         resize: true,
