@@ -34,3 +34,12 @@ $(function() {
         element.addClass('active');
     }
 });
+
+var sidebar = document.getElementsByClassName("sidebar")[0];
+
+var showing = false;
+document.getElementById("datamac").onclick = function() {
+    var attr = showing ? "none" : "block";
+    showing = showing ? false : true;
+    sidebar.style.display = attr;
+};
