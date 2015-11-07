@@ -35,3 +35,12 @@ var LargeStatus = React.createClass({
 ReactDOM.render(
 	<LargeStatus min={30} max={70} title={"Current Patrons"} flux={5}/>,
 	document.getElementById("nearby-devices"));
+
+var sidebar = document.getElementsByClassName("sidebar")[0];
+
+var showing = false;
+document.getElementById("datamac").onclick = function() {
+	var attr = showing ? "none" : "block";
+	showing = showing ? false : true;
+	sidebar.style.display = attr;
+};
