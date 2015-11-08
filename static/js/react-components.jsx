@@ -21,7 +21,7 @@ var LargeStatus = React.createClass({
 			var curNumber = reactObj.state.number;
 			var flux = reactObj.props.flux;
 			reactObj.setState({number:getRandomInt(max(curNumber - flux, reactObj.props.min), min(curNumber + flux + 1, reactObj.props.max))});
-		}, 1000);
+		}, 3000);
 	},
 	render: function () {
 		return (
@@ -33,5 +33,5 @@ var LargeStatus = React.createClass({
 });
 
 ReactDOM.render(
-	<LargeStatus min={30} max={70} title={"Current Patrons"} flux={5}/>,
+	<LargeStatus min={30} max={70} title={"Current Patrons"} flux={2}/>,
 	document.getElementById("nearby-devices"));

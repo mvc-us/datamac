@@ -25,7 +25,7 @@ var LargeStatus = React.createClass({
 			var curNumber = reactObj.state.number;
 			var flux = reactObj.props.flux;
 			reactObj.setState({ number: getRandomInt(max(curNumber - flux, reactObj.props.min), min(curNumber + flux + 1, reactObj.props.max)) });
-		}, 1000);
+		}, 3000);
 	},
 	render: function render() {
 		return React.createElement(
@@ -45,14 +45,5 @@ var LargeStatus = React.createClass({
 	}
 });
 
-ReactDOM.render(React.createElement(LargeStatus, { min: 30, max: 70, title: "Current Patrons", flux: 5 }), document.getElementById("nearby-devices"));
-
-var sidebar = document.getElementsByClassName("sidebar")[0];
-
-var showing = false;
-document.getElementById("datamac").onclick = function () {
-	var attr = showing ? "none" : "block";
-	showing = showing ? false : true;
-	sidebar.style.display = attr;
-};
+ReactDOM.render(React.createElement(LargeStatus, { min: 30, max: 70, title: "Current Patrons", flux: 2 }), document.getElementById("nearby-devices"));
 
