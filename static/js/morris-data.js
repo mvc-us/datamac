@@ -67,7 +67,7 @@ $(function() {
         // ykeys: ['nearby', 'dishes', 'eatIn'],
         // labels: ['Nearby', 'Dishes', 'Eat In'],
         pointSize: 2,
-        hideHover: 'auto',
+        hideHover: 'false',
         resize: true,
         xLabelFormat: getDayLabel,
     });
