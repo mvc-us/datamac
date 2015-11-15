@@ -82,7 +82,8 @@ $(function() {
         pointSize: 2,
         hideHover: 'auto',
         resize: true,
-        // xLabelFormat: getDayLabel,
+        dateFormat: function(x) {return new Date(x).getHours().toString() + ":00";},
+        // yLabelFormat: function(y) {return y.toString() + " employees";}
     });
 
     Morris.Donut({
