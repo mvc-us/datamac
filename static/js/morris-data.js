@@ -22,9 +22,9 @@ function fillDataArray() {
     for (var i = 0; i < 10; i++) {
         var item = {};
         item.period = getDayOfWeek(i);
-        item.nearby = getRandomInt(500, 1000);
+        item.nearby = getRandomInt(200, 500);
         // item.dishes = getRandomInt(300, 400);
-        item.eatIn = getRandomInt(100, 300);
+        item.eatIn = getRandomInt(25, 125);
         arr.push(item);
     }
     return arr;
@@ -56,7 +56,7 @@ function fillEmpArray() {
 
 $(function() {
 
-    Morris.Area({
+    var area = Morris.Area({
         element: 'morris-area-chart',
         data: fillDataArray(),
         xkey: 'period',
@@ -70,6 +70,12 @@ $(function() {
         hideHover: 'false',
         resize: true,
         xLabelFormat: getDayLabel,
+        lineColors: ['DodgerBlue', 'gray'],
+    });
+
+    area.options.labels.forEach(function(label, i){
+        var legendItem = $('<span></span>').text(label).css('color', area.options.lineColors[i]);
+        $('#legend').append(legendItem);
     });
 
     Morris.Area({
@@ -82,6 +88,7 @@ $(function() {
         pointSize: 2,
         hideHover: 'auto',
         resize: true,
+        lineColors: ['DodgerBlue'],
         dateFormat: function(x) {return new Date(x).getHours().toString() + ":00";},
         // yLabelFormat: function(y) {return y.toString() + " employees";}
     });
@@ -101,7 +108,7 @@ $(function() {
         resize: true
     });
 
-    Morris.Bar({
+    var bar = Morris.Bar({
         element: 'morris-bar-chart',
         data: [{
             y: 'Sunday',
@@ -136,7 +143,13 @@ $(function() {
         ykeys: ['a', 'b'],
         labels: ['Eat In', 'Takeout'],
         hideHover: 'auto',
-        resize: true
+        resize: true,
+        barColors: ['gray', 'green'],
+    });
+
+    bar.options.labels.forEach(function(label, i){
+        var legendItem = $('<span></span>').text(label).css('color', bar.options.barColors[i]);
+        $('#barLegend').append(legendItem);
     });
 
 });
