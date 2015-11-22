@@ -71,6 +71,11 @@ $(function() {
         resize: true,
         xLabelFormat: getDayLabel,
         lineColors: ['DodgerBlue', 'gray'],
+        dateFormat: function(x) {
+            var d = new Date(x);
+            var dayOfWeek = dayOfWeekAsString(d.getDay());
+            return dayOfWeek + " " + d.getMonth() + "/" + d.getDate();
+        },
     });
 
     area.options.labels.forEach(function(label, i){
