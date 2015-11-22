@@ -102,13 +102,13 @@ $(function() {
         element: 'morris-donut-chart',
         data: [{
             label: "In-Store Sales",
-            value: 35
-        },{
-            label: "Takeout Orders",
             value: 73
         },{
-            label: "Catering Orders",
-            value: 5
+            label: "Takeout Orders",
+            value: 35
+        },{
+            label: "Online Orders",
+            value: 27
         }],
         resize: true
     });
